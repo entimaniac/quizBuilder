@@ -1,31 +1,20 @@
 import React from "react";
 
 class Question extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  // setGender = (event) => {
-  //   console.log(event.target.value);
-  // };
-
   render() {
+    let data = this.props.data;
     return (
       <div>
         {this.props.data.prompt}
-        <div
-          onChange={(e) =>
-            this.props.updateChoice(this.props.data.id, e.target.value)
-          }
-        >
-          {this.props.data.choices.map((choice, index) => (
-            <span>
+        <div onChange={(e) => this.props.updateChoice(data.id, e.target.value)}>
+          {data.choices.map((choice, index) => (
+            <span key={index}>
               <input
-                key={index}
                 type="radio"
                 value={choice}
-                name={this.props.data.id}
-              />{" "}
+                checked={data.selectedChoice === choice}
+                name={data.id}
+              />
               {choice}
             </span>
           ))}

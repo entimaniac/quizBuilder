@@ -1,4 +1,5 @@
 import React from "react";
+import "./Quiz.css";
 import Question from "./Question";
 
 class Quiz extends React.Component {
@@ -6,6 +7,7 @@ class Quiz extends React.Component {
     super(props);
     this.state = {
       score: 0,
+      currentQuestion: 0,
       questions: [
         {
           id: 1,
@@ -40,12 +42,47 @@ class Quiz extends React.Component {
     this.setState({ questions: deepCopy });
   };
 
+  changeQuestions = (event) => {
+    this.setState({
+      currentQuestion:
+        this.state.currentQuestion + (event.target.name === "next" ? 1 : -1),
+    });
+  };
+
   render() {
+    let currentQuestion = this.state.questions[this.state.currentQuestion];
     return (
       <div>
-        {this.state.questions.map((q, index) => (
-          <Question key={q.id} data={q} updateChoice={this.updateChoice} />
-        ))}
+        <div className="container">
+          <div className="header">header</div>
+          <div className="left">
+            <button
+              name="back"
+              disabled={!this.state.currentQuestion}
+              onClick={(e) => this.changeQuestions(e)}
+            >
+              back
+            </button>
+          </div>
+          <div className="middle">
+            <Question data={currentQuestion} updateChoice={this.updateChoice} />
+          </div>
+          <div className="right">
+            <button
+              name="next"
+              disabled={
+                !(this.state.currentQuestion < this.state.questions.length - 1)
+              }
+              onClick={(e) => this.changeQuestions(e)}
+            >
+              next
+            </button>
+          </div>
+          <div className="footer">
+            You are on question #{this.state.currentQuestion + 1} of{" "}
+            {this.state.questions.length}
+          </div>
+        </div>
       </div>
     );
   }
