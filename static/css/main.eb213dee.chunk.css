@@ -1,0 +1,2 @@
+.container{display:grid;grid-template-columns:25% 50% 25%;grid-template-rows:10% 70% 20%;background-color:#fff;color:#444;height:100vh}.header{grid-column:1/-1;grid-row:1;border:solid green;text-align:center}.left{grid-column:1}.left,.middle{grid-row:2;border:solid green}.middle{grid-column:2}.right{grid-column:3;grid-row:2}.footer,.right{border:solid green}.footer{grid-column:1/-1;grid-row:3}
+/*# sourceMappingURL=main.eb213dee.chunk.css.map */
